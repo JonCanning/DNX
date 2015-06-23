@@ -3,6 +3,7 @@
 pushd %userprofile%\.dnx\runtimes\dnx*\bin\dnu
 set path=%path%;%cd%
 popd
+echo %path%
 dnu restore
 dnu build --configuration Release
 dnx . test
