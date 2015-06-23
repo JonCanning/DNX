@@ -5,6 +5,6 @@ dir %userprofile%\.dnx\runtimes\*.*
 rem cd %userprofile%\.dnx\runtimes\dnx*\bin
 rem set path=%path%;%cd%
 rem popd
-rem dnu restore
-rem dnu build --configuration Release
-rem dnx . test
+dnu restore
+dnu build --configuration Release
+dnx . test
