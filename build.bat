@@ -5,5 +5,6 @@ cd %userprofile%\.dnx\runtimes\dnx*\bin
 set path=%path%;%cd%
 popd
 cmd /c dnu restore
-cmd /c dnu build --configuration Release
+cmd /c dnu build Api --configuration Release
+cmd /c dnu build Tests --configuration Release
 cmd /c dnx . test
