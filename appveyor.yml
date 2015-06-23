@@ -1,2 +1,4 @@
 build_script:
   - build
+  
+test: off

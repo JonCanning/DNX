@@ -7,4 +7,4 @@ popd
 cmd /c dnu restore
 cmd /c dnu build Api --configuration Release
 cmd /c dnu build Tests --configuration Release
-cmd /c dnx . test
+cmd /c dnx Tests test
