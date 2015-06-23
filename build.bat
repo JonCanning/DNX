@@ -4,6 +4,6 @@ pushd %cd%
 cd %userprofile%\.dnx\runtimes\dnx*\bin
 set path=%path%;%cd%
 popd
-dnu restore
-dnu build --configuration Release
-dnx . test
+cmd /c dnu restore
+cmd /c dnu build --configuration Release
+cmd /c dnx . test
