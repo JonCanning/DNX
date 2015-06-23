@@ -18,6 +18,6 @@ public class Test{
 	[Fact]
 	public async void ThisShouldWork(){
 		var response = await client.GetAsync("/address/foo/bar");
-		Assert.Equal(System.Net.HttpStatusCode.Accepted, response.StatusCode);
+		Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
 	}
 }
