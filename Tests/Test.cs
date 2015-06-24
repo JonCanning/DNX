@@ -15,6 +15,7 @@ public class Test{
 		var testServer = TestServer.Create(x => startup.Configure(x, hostingEnvironment), startup.ConfigureServices);
 		client = testServer.CreateClient();
 	}
+	
 	[Fact]
 	public async void ThisShouldWork(){
 		var response = await client.GetAsync("/address/foo/bar");
