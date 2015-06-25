@@ -5,6 +5,9 @@ using Microsoft.Framework.Runtime.Infrastructure;
 using Microsoft.Framework.Runtime;
 using Microsoft.AspNet.Hosting;
 using System.Net.Http;
+using Newtonsoft.Json;
+using CTM.Postcode.Service.models;
+using System.Collections.Generic;
 public class Test{
 	HttpClient client;
 
@@ -19,6 +22,13 @@ public class Test{
 	[Fact]
 	public async void ThisShouldWork(){
 		var response = await client.GetAsync("/addresses/foo/bar");
+		
+		var result = response.Content.ReadAsStringAsync().Result;
+		
+		var address =  JsonConvert.DeserializeObject<List<Address>>(result);
+		
 		Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
+	    Assert.NotNull(address);
+		Assert.Equal(1, address.Count);
 	}
 }
