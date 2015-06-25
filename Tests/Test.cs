@@ -18,7 +18,7 @@ public class Test{
 	
 	[Fact]
 	public async void ThisShouldWork(){
-		var response = await client.GetAsync("/address/foo/bar");
+		var response = await client.GetAsync("/addresses/foo/bar");
 		Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
 	}
 }
