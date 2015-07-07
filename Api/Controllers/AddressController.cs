@@ -1,55 +1,30 @@
 using Microsoft.AspNet.Mvc;
-using System.Collections.Generic;
-using CTM.Postcode.Service.models;
+using System.Threading.Tasks;
 
 namespace CTM.Postcode.Service.Controllers
 {
-    public class AddressController : Controller
+  public class AddressController : Controller
+  {
+    PostcodeAnywhereLookup.Service lookupService;
+
+    public AddressController(PostcodeAnywhereLookup.Service lookupService)
     {
-        [HttpGet]
-        [Route("addresses/{postcode}/{number}")]
-        public List<Address> Get(string postcode, string number)
-        {
-            var addresses = new List<Address>();
-            
-            var address = new Address
-            {
-                FormattedAddress = new FormattedAddress
-                {
-                    LineOne = "1 Brudenell",
-                    LineTwo = "Orton Goldhay",
-                    LineThree = "Peterborough",
-                    LineFour = "",
-                    LineFive = "",
-                    LineSix = "",
-                    LineSeven = "",
-                    LineEight = "PE2 5SX"
-                },
-                PostOfficeAddress = new PostOfficeAddress
-                {
-                    OrganisationName = "",
-                    Department = "",
-                    SubBuilding = "",
-                    Building = "",
-                    Number = "1",
-                    DependentThoroughfare = "",
-                    Thoroughfare = "Brudenell",
-                    DoubleDependentLocality = "",
-                    DependentLocality = "Orton Goldhay",
-                    Town = "Peterborough",
-                    PostalCounty = "",
-                    Postcode = "PE2 5SX",
-                    AbbreviatedPostalCounty = "",
-                    OptionalCounty = "Cambridgeshire",
-                    AbbreviatedOptionalCounty = "Cambs",
-                    TraditionalCounty = "Huntingdonshire",
-                    AdministrativeCounty = "Peterborough",
-                    DPS = "1A",
-                    POBox = null
-                }
-            };
-            addresses.Add(address);
-            return addresses;
-        }
+      this.lookupService = lookupService;
     }
+
+    [HttpGet]
+    [Route("addresses/{postcode}/{houseNumber}")]
+    public async Task<PostcodeAnywhereLookup.PostOfficeAddress[]> Get(string postcode, string houseNumber)
+    {
+      var postOfficeAddresses = await lookupService.Lookup(postcode, houseNumber);
+      return postOfficeAddresses;
+    }
+
+    [HttpGet]
+    [Route("addresses/{postcode}")]
+    public async Task<PostcodeAnywhereLookup.PostOfficeAddress[]> Get(string postcode)
+    {
+      return await Get(postcode, null);
+    }
+  }
 }

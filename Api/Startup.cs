@@ -13,11 +13,11 @@ namespace CTM.Postcode.Service
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient(typeof(PostcodeAnywhereLookup.Service), x => new PostcodeAnywhereLookup.Service("http://192.168.251.199:81/afddata.pce"));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseStaticFiles();
             app.UseMvc();
         }
     }
